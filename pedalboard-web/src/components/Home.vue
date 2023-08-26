@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { type Pedal } from '../models/pedal'
 import { type Knob } from '../models/knob'
+import  PedalList from './PedalList.vue'
 
 const pedals: Ref<Pedal[]> = ref([])
 
@@ -34,17 +35,19 @@ const removeKnob = (knob: Knob) => {
 </script>
 
 <template>
-  <form @submit.prevent="addPedal">
+  <div>
+    <h2>Create Pedal</h2>
+    <form @submit.prevent="addPedal">
     <div class="singleInput">
-        <h2>Name</h2>
+        <h3>Name</h3>
         <input v-model="pedalName" placeholder="name your pedal">
     </div>
     <div class="singleInput">
-        <h2>Brand</h2>
+        <h3>Brand</h3>
         <input v-model="pedalBrand" placeholder="pedal's brand">
     </div>
     <div class="singleInput">
-        <h2>Knobs</h2>
+        <h3>Knobs</h3>
         <button @click="addKnob" type="button">+</button>
     </div>
     <div class="singleInput" v-for="knob in pedalKnobs" :key="knob.id">
@@ -53,6 +56,8 @@ const removeKnob = (knob: Knob) => {
     </div>
     <button>create pedal</button>
   </form>
+  </div>
+  <PedalList :pedals="pedals"/>
 </template>
 
 <style>
@@ -60,6 +65,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 40%;
+    padding: 20px;
 }
 
 .singleInput {

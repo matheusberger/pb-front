@@ -3,13 +3,11 @@ import Home from './components/Home.vue'
 </script>
 
 <template>
-  <div>
-    <header>
-      <h1>Welcome to PedalBoard!</h1>
-    </header>
-    <div class="content"> 
-      <Home/>
-    </div>
+  <header>
+    <h1>Welcome to PedalBoard!</h1>
+  </header>
+  <div class="content"> 
+    <Home/>
   </div>
 </template>
 
