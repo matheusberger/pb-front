@@ -20,7 +20,6 @@ const addPedal = () => {
         pedalBrand.value = ''
         pedalKnobs.value = [{ id: knobCount.value, name: '', value: 0 }]
     }
-    console.log(pedals.value)
 }
 
 const addKnob = () => {
