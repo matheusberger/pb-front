@@ -21,7 +21,6 @@ const addPedal = () => {
         pedalBrand.value = ''
         pedalKnobs.value = [{ id: knobCount.value, name: '', value: 0 }]
     }
-    console.log(pedals.value)
 }
 
 const addKnob = () => {
@@ -52,7 +51,7 @@ const removeKnob = (knob: Knob) => {
     </div>
     <div class="singleInput" v-for="knob in pedalKnobs" :key="knob.id">
         <input v-model="knob.name" placeholder="knob name here">
-        <button @click="" type="button">x</button>
+        <button @click="removeKnob(knob)" type="button">x</button>
     </div>
     <button>create pedal</button>
   </form>
