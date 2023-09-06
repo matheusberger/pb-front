@@ -15,9 +15,10 @@ const isEditing = ref(false)
 const toggleEdit = () => {
     isEditing.value = !isEditing.value
 }
-const handleEdit = (pedal: Pedal) => {
+const handleEdit = (updatedPedal: Pedal) => {
     toggleEdit();
-    props.onEdit(pedal);
+    pedal.value = updatedPedal
+    props.onEdit(updatedPedal);
 }
 </script>
 
