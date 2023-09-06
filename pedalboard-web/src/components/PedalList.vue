@@ -5,18 +5,14 @@ import PedalItem from './PedalItem.vue';
 
 interface Props {
     pedals: Pedal[]
+    onUpdate: (pedal: Pedal) => void
 }
 
 const props = defineProps<Props>();
 const pedals = ref(props.pedals);
 
 const handleEdit = (updatedPedal: Pedal): void => {
-  pedals.value = pedals.value.map((pedal) => {
-    if (pedal.id == updatedPedal.id) {
-      return updatedPedal
-    }
-    return pedal
-  })
+  props.onUpdate(updatedPedal);
 };
 
 </script>
@@ -24,7 +20,7 @@ const handleEdit = (updatedPedal: Pedal): void => {
 <template>
     <h2>Pedals</h2>
     <li v-for="pedal in pedals">
-      <PedalItem :pedal="pedal" :onEdit="handleEdit(pedal)" />
+      <PedalItem :pedal="pedal" :onEdit="handleEdit" :key="pedal.id"/>
     </li>
 </template>
 

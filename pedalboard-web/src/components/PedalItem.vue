@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { type Pedal } from '../models/pedal'
-import { type Knob } from '../models/knob'
+import PedalForm from './PedalForm.vue';
 
 interface Props {
     pedal: Pedal;
-    onEdit: () => void;
+    onEdit: (pedal: Pedal) => void;
 }
 const props = defineProps<Props>();
 
@@ -14,6 +14,10 @@ const isEditing = ref(false)
 
 const toggleEdit = () => {
     isEditing.value = !isEditing.value
+}
+const handleEdit = (pedal: Pedal) => {
+    toggleEdit();
+    props.onEdit(pedal);
 }
 </script>
 
@@ -27,7 +31,8 @@ const toggleEdit = () => {
             </li>
         </div>
         <div v-else>
-            
+            <button @click="toggleEdit">cancel</button>
+            <PedalForm :pedal="pedal" :isEditing="true" :onComplete="handleEdit"/>
         </div>
         
     </div>
