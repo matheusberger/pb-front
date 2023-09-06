@@ -1,12 +1,10 @@
 # PedalBoard web front-end
 Front-end for the PedalBoard project.
 
-## Installation
-
-### Dependencies
+## Dependencies
 - Node.JS
 
-### How to run
+## How to run
 1. Install/Update Node.JS
 2. Open terminal and navigate to pedalboard-web
 3. Run 'npm install'
