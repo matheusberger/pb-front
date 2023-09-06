@@ -9,7 +9,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const pedals = ref(props.pedals);
 
 const handleEdit = (updatedPedal: Pedal): void => {
   props.onUpdate(updatedPedal);
@@ -19,8 +18,8 @@ const handleEdit = (updatedPedal: Pedal): void => {
 
 <template>
     <h2>Pedals</h2>
-    <li v-for="pedal in pedals">
-      <PedalItem :pedal="pedal" :onEdit="handleEdit" :key="pedal.id"/>
+    <li v-for="pedal in props.pedals" :key="pedal.id">
+      <PedalItem :pedal="pedal" :onEdit="handleEdit"/>
     </li>
 </template>
 
