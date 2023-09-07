@@ -7,19 +7,19 @@ import  PedalList from './PedalList.vue'
 
 const pedals: Ref<Pedal[]> = ref([])
 
-const knobCount = ref(1);
+const knobCount = ref(0);
 const pedalName = ref('')
 const pedalBrand = ref('')
-const pedalKnobs: Ref<Knob[]> = ref([{ id: knobCount.value, name: '', value: 0 }])
+const pedalKnobs: Ref<Knob[]> = ref([])
 
 const addPedal = () => {
     if (pedalName.value != '' && pedalBrand.value != '') {
         pedals.value.push({ name: pedalName.value, brand: pedalBrand.value, knobs: pedalKnobs.value })
 
-        knobCount.value = 1
+        knobCount.value = 0
         pedalName.value = ''
         pedalBrand.value = ''
-        pedalKnobs.value = [{ id: knobCount.value, name: '', value: 0 }]
+        pedalKnobs.value = []
     }
 }
 
