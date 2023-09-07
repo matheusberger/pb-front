@@ -16,11 +16,10 @@ const props = defineProps<Props>()
   <h2>Pedals</h2>
   <li v-for="pedal in pedals">
     <div class="pedal">
-      <h3>{{ pedal.name }}</h3>
+      <h3>{{ pedal.name }} - {{ pedal.brand }}</h3>
       <li class="knobs" v-for="knob in pedal.knobs">
         - {{ knob.name }}
       </li>
-      <h3>{{ pedal.brand }}</h3>
     </div>
   </li>
 </template>
