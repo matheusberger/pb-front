@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
   <header>
     <h1>Welcome to PedalBoard!</h1>
   </header>
+  <br>
   <div class="content"> 
     <Home/>
   </div>
