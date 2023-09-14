@@ -1,43 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Prop, Ref } from 'vue'
 import { type Pedal } from '../models/pedal'
-import { type Knob } from '../models/knob'
+import PedalItem from './PedalItem.vue';
 
 interface Props {
     pedals: Pedal[]
+    onUpdate: (pedal: Pedal) => void
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
+
+const handleEdit = (updatedPedal: Pedal): void => {
+  props.onUpdate(updatedPedal);
+};
 
 </script>
 
 <template>
-  <h2>Pedals</h2>
-  <li v-for="pedal in pedals">
-    <div class="pedal">
-      <h3>{{ pedal.name }} - {{ pedal.brand }}</h3>
-      <li class="knobs" v-for="knob in pedal.knobs">
-        - {{ knob.name }}
-      </li>
-    </div>
-  </li>
+    <h2>Pedals</h2>
+    <li v-for="pedal in props.pedals" :key="pedal.id">
+      <PedalItem :pedal="pedal" :onEdit="handleEdit"/>
+    </li>
 </template>
 
 <style>
 li {
     list-style-type: none;
-}
-
-.pedal {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-
-.knobs {
-    display: flex;
-    flex-direction: row;
-    padding-left: 20px;
 }
 </style>

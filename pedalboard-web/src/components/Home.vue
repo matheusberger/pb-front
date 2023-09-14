@@ -1,89 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { type Pedal } from '../models/pedal'
-import { type Knob } from '../models/knob'
 import  PedalList from './PedalList.vue'
+import PedalForm from './PedalForm.vue'
 
 const pedals: Ref<Pedal[]> = ref([])
+const pedalCount = ref(0);
 
-const knobCount = ref(0);
-const pedalName = ref('')
-const pedalBrand = ref('')
-const pedalKnobs: Ref<Knob[]> = ref([])
+const addPedal = (newPedal: Pedal) => {
+    pedals.value.push(newPedal);
+};
 
-const addPedal = () => {
-    if (pedalName.value != '' && pedalBrand.value != '') {
-        pedals.value.push({ name: pedalName.value, brand: pedalBrand.value, knobs: pedalKnobs.value })
-
-        knobCount.value = 0
-        pedalName.value = ''
-        pedalBrand.value = ''
-        pedalKnobs.value = []
-    }
-}
-
-const addKnob = () => {
-    knobCount.value++
-    pedalKnobs.value.push({ id: knobCount.value, name:'', value: 0})
-}
-
-const removeKnob = (knob: Knob) => {
-    pedalKnobs.value = pedalKnobs.value.filter((k) => k !== knob)
+const updatePedal = (updatedPedal: Pedal) => {
+    pedals.value = pedals.value.map((pedal) => {
+        if (pedal.id == updatedPedal.id) {
+            console.log("updating pedal");
+            return updatedPedal
+        }
+        return pedal
+    })
 }
 </script>
 
 <template>
   <div>
-    <h2>Create Pedal</h2>
-    <form @submit.prevent="addPedal">
-    <div class="singleInput">
-        <h3>Name</h3>
-        <input v-model="pedalName" placeholder="name your pedal">
-    </div>
-    <div class="singleInput">
-        <h3>Brand</h3>
-        <input v-model="pedalBrand" placeholder="pedal's brand">
-    </div>
-    <div class="singleInput">
-        <h3>Knobs</h3>
-        <button @click="addKnob" type="button">+</button>
-    </div>
-    <div class="singleInput" v-for="knob in pedalKnobs" :key="knob.id">
-        <input v-model="knob.name" placeholder="knob name here">
-        <button @click="removeKnob(knob)" type="button">x</button>
-    </div>
-    <button>create pedal</button>
-  </form>
+    <PedalForm :pedal="{ id: pedalCount, name: '', brand: '', knobs: [] }" :isEditing="false" :onComplete="addPedal"/>
   </div>
-  <PedalList :pedals="pedals"/>
+  <PedalList :pedals="pedals" :onUpdate="updatePedal"/>
 </template>
 
 <style>
-form {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    padding: 20px;
-}
-
-.singleInput {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-input {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-button {
-    margin: 10px;
-    padding: 5px;
-    font-weight: bold;
-    font-size: large;
-    border-radius: 10px;
-}
 </style>
